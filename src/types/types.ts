@@ -14,4 +14,10 @@ interface IToDoProps {
   todoStatusHandler: (id: number) => void;
 }
 
-export type { IToDo, IToDoItem, IToDoProps };
+///
+
+interface ITodoState {
+  items: IToDo[];
+}
+
+export type { IToDo, IToDoItem, IToDoProps, ITodoState };

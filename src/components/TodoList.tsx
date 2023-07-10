@@ -1,17 +1,22 @@
-import { IToDoProps } from "../types/types";
 import TodoItem from "./TodoItem";
+import { useAppSelector } from "../hooks";
+import { useAppDispatch } from "../hooks";
+import { removeTodo, todoStatusHandler } from "../store/todoSlice";
 
-function TodoList(props: IToDoProps) {
-  const { items, removeTodo, todoStatusHandler } = props;
+function TodoList() {
+  const todos = useAppSelector((state) => state.todos.items);
+  const dispatch = useAppDispatch();
 
   return (
     <div>
-      {items.map((todo) => (
+      {todos.map((todo) => (
         <TodoItem
           key={todo.id}
           {...todo}
-          removeTodo={removeTodo}
-          todoStatusHandler={todoStatusHandler}
+          removeTodo={() => dispatch(removeTodo(todo.id))}
+          todoStatusHandler={() => {
+            dispatch(() => todoStatusHandler(55));
+          }}
         />
       ))}
     </div>
