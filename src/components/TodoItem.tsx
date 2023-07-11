@@ -1,9 +1,11 @@
-import { IToDoItem } from "../types/types";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { ITodoItem } from "../types/types";
 
-function TodoItem(props: IToDoItem) {
-  const { id, title, completed, removeTodo, todoStatusHandler } = props;
-
+const TodoItem: React.FC<ITodoItem> = ({
+  title,
+  completed,
+  removeTodo,
+  todoStatusHandler,
+}) => {
   return (
     <div className="flex items-star my-2 gap-x-3 justify-start w-full">
       <input
@@ -12,7 +14,7 @@ function TodoItem(props: IToDoItem) {
         name=""
         id=""
         checked={completed}
-        onChange={() => todoStatusHandler(id)}
+        onChange={todoStatusHandler}
       />
       <p
         className={
@@ -26,12 +28,12 @@ function TodoItem(props: IToDoItem) {
 
       <button
         className="bg-slate-50 rounded border px-2 py-1 mr-5 active:scale-90 active:border-slate-400 active:bg-slate-100 shadow-md"
-        onClick={() => removeTodo(id)}
+        onClick={removeTodo}
       >
         remove
       </button>
     </div>
   );
-}
+};
 
 export default TodoItem;

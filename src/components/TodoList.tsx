@@ -1,6 +1,5 @@
 import TodoItem from "./TodoItem";
-import { useAppSelector } from "../hooks";
-import { useAppDispatch } from "../hooks";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import { removeTodo, todoStatusHandler } from "../store/todoSlice";
 
 function TodoList() {
@@ -13,10 +12,8 @@ function TodoList() {
         <TodoItem
           key={todo.id}
           {...todo}
-          removeTodo={() => dispatch(removeTodo(todo.id))}
-          todoStatusHandler={() => {
-            dispatch(() => todoStatusHandler(55));
-          }}
+          removeTodo={() => dispatch(removeTodo({ id: todo.id }))}
+          todoStatusHandler={() => dispatch(todoStatusHandler({ id: todo.id }))}
         />
       ))}
     </div>

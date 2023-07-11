@@ -10,21 +10,23 @@ const todoSlice = createSlice({
   initialState: initialState,
 
   reducers: {
-    addTodo(state, action: PayloadAction<{ data: string }>) {
-      if (action.payload.data.trim()) {
+    addTodo(state, action: PayloadAction<{ title: string }>): void {
+      if (action.payload.title.trim()) {
         state.items.push({
           id: Date.now(),
-          title: action.payload.data,
+          title: action.payload.title,
           completed: false,
         });
       }
     },
-    removeTodo(state, action: PayloadAction<number>) {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+
+    removeTodo(state, action: PayloadAction<{ id: number }>): void {
+      state.items = state.items.filter((item) => item.id !== action.payload.id);
     },
-    todoStatusHandler(state, action: PayloadAction<number>) {
+
+    todoStatusHandler(state, action: PayloadAction<{ id: number }>): void {
       state.items = state.items.map((item) =>
-        item.id !== action.payload
+        item.id !== action.payload.id
           ? item
           : { ...item, completed: !item.completed },
       );

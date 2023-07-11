@@ -3,21 +3,14 @@ interface IToDo {
   title: string;
   completed: boolean;
 }
-interface IToDoItem extends IToDo {
-  removeTodo: (id: number) => void;
-  todoStatusHandler: (id: number) => void;
-}
 
-interface IToDoProps {
-  items: IToDo[];
-  removeTodo: (id: number) => void;
-  todoStatusHandler: (id: number) => void;
+interface ITodoItem extends IToDo {
+  removeTodo: () => void;
+  todoStatusHandler: () => void;
 }
-
-///
 
 interface ITodoState {
   items: IToDo[];
 }
 
-export type { IToDo, IToDoItem, IToDoProps, ITodoState };
+export type { IToDo, ITodoState, ITodoItem };
