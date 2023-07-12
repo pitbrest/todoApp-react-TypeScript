@@ -11,6 +11,8 @@ interface ITodoItem extends IToDo {
 
 interface ITodoState {
   items: IToDo[];
+  loading: boolean;
+  error: null | string;
 }
 
 export type { IToDo, ITodoState, ITodoItem };
