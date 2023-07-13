@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAppDispatch } from "../hooks";
-import { addTodo } from "../store/todoSlice";
+import { fetchTodos, addNewTodo } from "../store/todoSlice";
 
 function NewTodoForm() {
   const [value, setValue] = useState("");
@@ -13,20 +13,24 @@ function NewTodoForm() {
 
   const dispatch = useAppDispatch();
 
-  const addNewTodo = () => {
-    dispatch(addTodo({ title: value }));
-    cleanupInput();
+  const addTodo = () => {
+    if (value.trim().length) {
+      dispatch(addNewTodo({ title: value }));
+      cleanupInput();
+    }
   };
 
-  const inputKeybordHandler: React.KeyboardEventHandler<HTMLInputElement> = (
-    e,
-  ) => {
-    if (e.key === "Enter") addNewTodo();
+  const inputKeybordHandler: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === "Enter") addTodo();
   };
 
   useEffect(() => {
     inputFieldRef.current && inputFieldRef.current.focus();
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
   return (
     <div className="flex mb-10 h-[40px]">
@@ -40,7 +44,7 @@ function NewTodoForm() {
       />
       <button
         className="bg-slate-50 rounded border-2 px-2 py-1 mr-5 active:scale-90 active:border-slate-400 active:bg-slate-00 basis-1/12 shadow-md"
-        onClick={() => addNewTodo()}
+        onClick={() => addTodo()}
       >
         add
       </button>

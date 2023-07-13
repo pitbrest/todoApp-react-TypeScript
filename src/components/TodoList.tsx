@@ -1,6 +1,6 @@
 import TodoItem from "./TodoItem";
 import { useAppSelector, useAppDispatch } from "../hooks";
-import { removeTodo, todoStatusHandler } from "../store/todoSlice";
+import { removeTodo, toggleTodoStatus } from "../store/todoSlice";
 
 function TodoList() {
   const todos = useAppSelector((state) => state.todos.items);
@@ -13,7 +13,7 @@ function TodoList() {
           key={todo.id}
           {...todo}
           removeTodo={() => dispatch(removeTodo({ id: todo.id }))}
-          todoStatusHandler={() => dispatch(todoStatusHandler({ id: todo.id }))}
+          todoStatusHandler={() => dispatch(toggleTodoStatus({ id: todo.id }))}
         />
       ))}
     </div>

@@ -1,15 +1,10 @@
 import { ITodoItem } from "../types/types";
 
-const TodoItem: React.FC<ITodoItem> = ({
-  title,
-  completed,
-  removeTodo,
-  todoStatusHandler,
-}) => {
+const TodoItem: React.FC<ITodoItem> = ({ title, completed, removeTodo, todoStatusHandler }) => {
   return (
     <div className="flex items-star my-2 gap-x-3 justify-start w-full">
       <input
-        className="self-center"
+        className="self-center basis-1/12"
         type="checkbox"
         name=""
         id=""
